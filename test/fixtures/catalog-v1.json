@@ -1,0 +1,329 @@
+{
+	"version": 1,
+	"actions": [
+		{
+			"id": "device.playlist",
+			"category": "playback",
+			"name": "Play a playlist on a screen",
+			"description": "Switches one screen to a playlist. It stays until something else is assigned.",
+			"method": "POST",
+			"path": "/api/v1/devices/{device}/playlist",
+			"params": [
+				{
+					"key": "device",
+					"label": "Screen",
+					"kind": "device",
+					"in": "path",
+					"field": null,
+					"choices": null
+				},
+				{
+					"key": "playlist",
+					"label": "Playlist",
+					"kind": "playlist",
+					"in": "body",
+					"field": "playlist_id",
+					"choices": null
+				}
+			],
+			"fixed_body": {},
+			"min_role": "operator",
+			"destructive": false
+		},
+		{
+			"id": "group.playlist",
+			"category": "playback",
+			"name": "Play a playlist on a group",
+			"description": "Switches every screen in a group to a playlist.",
+			"method": "POST",
+			"path": "/api/v1/device-groups/{group}/assignment",
+			"params": [
+				{
+					"key": "group",
+					"label": "Group",
+					"kind": "group",
+					"in": "path",
+					"field": null,
+					"choices": null
+				},
+				{
+					"key": "playlist",
+					"label": "Playlist",
+					"kind": "playlist",
+					"in": "body",
+					"field": "playlist_id",
+					"choices": null
+				}
+			],
+			"fixed_body": {},
+			"min_role": "operator",
+			"destructive": false
+		},
+		{
+			"id": "device.media",
+			"category": "playback",
+			"name": "Show a picture or video on a screen",
+			"description": "Puts one item from the media library on a screen, replacing its playlist.",
+			"method": "POST",
+			"path": "/api/v1/media/{media}/display",
+			"params": [
+				{
+					"key": "media",
+					"label": "Media",
+					"kind": "media",
+					"in": "path",
+					"field": null,
+					"choices": null
+				},
+				{
+					"key": "device",
+					"label": "Screen",
+					"kind": "device",
+					"in": "body",
+					"field": "device_id",
+					"choices": null
+				}
+			],
+			"fixed_body": {},
+			"min_role": "operator",
+			"destructive": false
+		},
+		{
+			"id": "device.web_page",
+			"category": "playback",
+			"name": "Show a web page on a screen",
+			"description": "Puts a web dashboard or countdown on a screen.",
+			"method": "POST",
+			"path": "/api/v1/devices/{device}/web-page",
+			"params": [
+				{
+					"key": "device",
+					"label": "Screen",
+					"kind": "device",
+					"in": "path",
+					"field": null,
+					"choices": null
+				},
+				{
+					"key": "web_page",
+					"label": "Web page",
+					"kind": "web_page",
+					"in": "body",
+					"field": "web_page_id",
+					"choices": null
+				}
+			],
+			"fixed_body": {},
+			"min_role": "operator",
+			"destructive": false
+		},
+		{
+			"id": "device.stream",
+			"category": "streams",
+			"name": "Show a live stream on a screen",
+			"description": "Switches a screen to a live stream. If the stream drops, the screen falls back to its playlist.",
+			"method": "POST",
+			"path": "/api/v1/devices/{device}/stream",
+			"params": [
+				{
+					"key": "device",
+					"label": "Screen",
+					"kind": "device",
+					"in": "path",
+					"field": null,
+					"choices": null
+				},
+				{
+					"key": "stream",
+					"label": "Stream",
+					"kind": "stream",
+					"in": "body",
+					"field": "stream_id",
+					"choices": null
+				}
+			],
+			"fixed_body": {},
+			"min_role": "operator",
+			"destructive": false
+		},
+		{
+			"id": "device.stream.stop",
+			"category": "streams",
+			"name": "Stop the live stream on a screen",
+			"description": "Takes a screen off its live stream and back to what it showed before.",
+			"method": "POST",
+			"path": "/api/v1/devices/{device}/stream",
+			"params": [
+				{
+					"key": "device",
+					"label": "Screen",
+					"kind": "device",
+					"in": "path",
+					"field": null,
+					"choices": null
+				}
+			],
+			"fixed_body": {
+				"stream_id": null
+			},
+			"min_role": "operator",
+			"destructive": false
+		},
+		{
+			"id": "group.stream",
+			"category": "streams",
+			"name": "Show a live stream on a group",
+			"description": "Switches every screen in a group to a live stream.",
+			"method": "POST",
+			"path": "/api/v1/device-groups/{group}/assignment",
+			"params": [
+				{
+					"key": "group",
+					"label": "Group",
+					"kind": "group",
+					"in": "path",
+					"field": null,
+					"choices": null
+				},
+				{
+					"key": "stream",
+					"label": "Stream",
+					"kind": "stream",
+					"in": "body",
+					"field": "stream_id",
+					"choices": null
+				}
+			],
+			"fixed_body": {},
+			"min_role": "operator",
+			"destructive": false
+		},
+		{
+			"id": "override.activate",
+			"category": "overrides",
+			"name": "Start an emergency override",
+			"description": "Puts a prepared emergency override on every screen in its scope. Refused while another is live.",
+			"method": "POST",
+			"path": "/api/v1/overrides/{override}/activate",
+			"params": [
+				{
+					"key": "override",
+					"label": "Override",
+					"kind": "override",
+					"in": "path",
+					"field": null,
+					"choices": null
+				}
+			],
+			"fixed_body": {},
+			"min_role": "admin",
+			"destructive": true
+		},
+		{
+			"id": "override.clear",
+			"category": "overrides",
+			"name": "End an emergency override",
+			"description": "Clears a live override. Screens go back to what they were showing.",
+			"method": "POST",
+			"path": "/api/v1/overrides/{override}/clear",
+			"params": [
+				{
+					"key": "override",
+					"label": "Override",
+					"kind": "override",
+					"in": "path",
+					"field": null,
+					"choices": null
+				}
+			],
+			"fixed_body": {},
+			"min_role": "admin",
+			"destructive": false
+		},
+		{
+			"id": "device.power",
+			"category": "display",
+			"name": "Turn a screen on or off",
+			"description": "Wakes or sleeps the TV (HDMI-CEC, plus dropping the signal). Holds until the next power-schedule change.",
+			"method": "POST",
+			"path": "/api/v1/devices/{device}/power",
+			"params": [
+				{
+					"key": "device",
+					"label": "Screen",
+					"kind": "device",
+					"in": "path",
+					"field": null,
+					"choices": null
+				},
+				{
+					"key": "power",
+					"label": "Power",
+					"kind": "choice",
+					"in": "body",
+					"field": "power",
+					"choices": [
+						{
+							"value": "on",
+							"label": "On"
+						},
+						{
+							"value": "off",
+							"label": "Off"
+						}
+					]
+				}
+			],
+			"fixed_body": {},
+			"min_role": "operator",
+			"destructive": false
+		},
+		{
+			"id": "device.restart_playback",
+			"category": "system",
+			"name": "Restart playback on a screen",
+			"description": "Restarts the player without rebooting. The picture blanks for a few seconds.",
+			"method": "POST",
+			"path": "/api/v1/devices/{device}/actions",
+			"params": [
+				{
+					"key": "device",
+					"label": "Screen",
+					"kind": "device",
+					"in": "path",
+					"field": null,
+					"choices": null
+				}
+			],
+			"fixed_body": {
+				"action": "restart_playback"
+			},
+			"min_role": "admin",
+			"destructive": true
+		},
+		{
+			"id": "device.reboot",
+			"category": "system",
+			"name": "Reboot a screen's player",
+			"description": "Reboots the player box. The screen is dark for about a minute.",
+			"method": "POST",
+			"path": "/api/v1/devices/{device}/actions",
+			"params": [
+				{
+					"key": "device",
+					"label": "Screen",
+					"kind": "device",
+					"in": "path",
+					"field": null,
+					"choices": null
+				}
+			],
+			"fixed_body": {
+				"action": "reboot"
+			},
+			"min_role": "admin",
+			"destructive": true
+		}
+	],
+	"options": null
+}

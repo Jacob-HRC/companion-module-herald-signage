@@ -1,0 +1,28 @@
+{
+	"$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
+	"type": "connection",
+	"id": "herald-signage",
+	"name": "herald-signage",
+	"shortname": "herald",
+	"description": "Drive Herald Signage screens, live streams and emergency overrides, with button feedback.",
+	"version": "0.0.0",
+	"license": "MIT",
+	"repository": "git+https://github.com/Jacob-HRC/companion-module-herald-signage.git",
+	"bugs": "https://github.com/Jacob-HRC/companion-module-herald-signage/issues",
+	"maintainers": [
+		{
+			"name": "Jacob Neudorf",
+			"email": "jacob@hrc.email"
+		}
+	],
+	"runtime": {
+		"type": "node22",
+		"api": "nodejs-ipc",
+		"apiVersion": "0.0.0",
+		"entrypoint": "../dist/main.js"
+	},
+	"legacyIds": [],
+	"manufacturer": "Herald",
+	"products": ["Signage"],
+	"keywords": ["signage", "digital signage", "church", "screens", "emergency"]
+}
